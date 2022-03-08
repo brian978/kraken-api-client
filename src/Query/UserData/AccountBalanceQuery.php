@@ -9,5 +9,8 @@ class AccountBalanceQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'Balance';
+    protected int $weight = 1;
 }

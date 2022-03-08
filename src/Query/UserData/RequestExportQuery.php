@@ -11,13 +11,19 @@ class RequestExportQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'AddExport';
+    protected int $weight = 1;
 
+    # Parameter properties
     protected array $required = ['report', 'description'];
 
+    // Type of report
     public const REPORT_TRADES = 'trades';
     public const REPORT_LEDGERS = 'ledgers';
 
+    // Format of the report
     public const FORMAT_CSV = 'CSV';
     public const FORMAT_TSV = 'TSV';
 

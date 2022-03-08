@@ -8,10 +8,14 @@ use Composer\CaBundle\CaBundle;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\RequestOptions as GuzzleRequestOptions;
 use KrakenApi\Client as KrakenApiClient;
+use KrakenApi\RateLimiter\RateLimiter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Symfony\Component\Lock\LockFactory;
+use Symfony\Component\Lock\Store\InMemoryStore;
+use Symfony\Component\RateLimiter\Storage\InMemoryStorage;
 
 class ClientBuilder implements LoggerAwareInterface
 {
@@ -59,7 +63,10 @@ class ClientBuilder implements LoggerAwareInterface
             GuzzleRequestOptions::VERIFY => CaBundle::getSystemCaRootBundlePath()
         ]);
 
-        $client = new KrakenApiClient($httpClient, $this->apiKey, $this->apiSecret, $this->apiVersion);
+        $rateLimiter = new RateLimiter(new InMemoryStorage(), new LockFactory(new InMemoryStore()));
+        $rateLimiter->setLogger($this->logger);
+
+        $client = new KrakenApiClient($httpClient, $rateLimiter, $this->apiKey, $this->apiSecret, $this->apiVersion);
         $client->setLogger($this->logger);
 
         return $client;

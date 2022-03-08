@@ -11,8 +11,12 @@ class OhlcDataQuery extends Query
 {
     use PublicQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'OHLC';
+    protected int $weight = 0;
 
+    # Parameter properties
     protected array $required = ['pair'];
 
     /**

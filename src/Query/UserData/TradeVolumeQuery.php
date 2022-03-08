@@ -11,7 +11,10 @@ class TradeVolumeQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'TradeVolume';
+    protected int $weight = 1;
 
     /**
      * Comma delimited list of asset pairs to get fee info on (optional)
@@ -21,7 +24,7 @@ class TradeVolumeQuery extends Query
     protected string $pair;
 
     /**
-     * Whether or not to include fee info in results (optional)
+     * Whether to include fee info in results (optional)
      *
      * @var bool
      */

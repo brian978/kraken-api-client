@@ -11,10 +11,15 @@ class RemoveExportQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'RetrieveExport';
+    protected int $weight = 1;
 
+    # Parameter properties
     protected array $required = ['id', 'type'];
 
+    // Types of action on the Export queue
     public const TYPE_CANCEL = 'cancel';
     public const TYPE_DELETE = 'delete';
 

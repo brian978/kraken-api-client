@@ -11,8 +11,12 @@ class TickerQuery extends Query
 {
     use PublicQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'Ticker';
+    protected int $weight = 0;
 
+    # Parameter properties
     protected array $required = ['pair'];
 
     /**

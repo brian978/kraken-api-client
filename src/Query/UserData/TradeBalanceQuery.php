@@ -11,7 +11,10 @@ class TradeBalanceQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'TradeBalance';
+    protected int $weight = 1;
 
     /**
      * Base asset used to determine balance

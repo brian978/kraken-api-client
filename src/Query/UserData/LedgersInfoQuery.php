@@ -11,8 +11,12 @@ class LedgersInfoQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'Ledgers';
+    protected int $weight = 2;
 
+    // Types of  ledger entries
     public const TYPE_ALL = 'all';
     public const TYPE_DEPOSIT = 'deposit';
     public const TYPE_WITHDRAWAL = 'withdrawal';

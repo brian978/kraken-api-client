@@ -11,7 +11,10 @@ class ClosedOrdersQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'ClosedOrders';
+    protected int $weight = 1;
 
     /**
      * Whether or not to include trades related to position in output

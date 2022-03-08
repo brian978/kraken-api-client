@@ -11,7 +11,10 @@ class AssetInfoQuery extends Query
 {
     use PublicQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'Assets';
+    protected int $weight = 0;
 
     /**
      * Comma delimited list of assets to get info on.
