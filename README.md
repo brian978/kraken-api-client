@@ -45,6 +45,16 @@ In your services.yaml
 # KrakenApi namespace auto-wire
 KrakenApi\:
   resource: '../vendor/brian978/kraken-api-client/src/'
+  
+# Kraken API rate limiter
+app.limiter.storage.kraken_api:
+  class: Symfony\Component\RateLimiter\Storage\CacheStorage
+
+KrakenApi\RateLimiter\RateLimiter:
+  shared: false
+  arguments:
+    - '@app.limiter.storage.kraken_api'
+    - '@lock.default.factory'
 
 # Kraken API client
 app.krakenHttp.client:
@@ -55,9 +65,10 @@ app.krakenHttp.client:
 KrakenApi\Client:
   class: KrakenApi\Client
   arguments:
-    $httpClient: '@app.krakenHttp.client'
-    $apiKey: '%env(resolve:KRAKEN_API_KEY)%'
-    $apiSecret: '%env(resolve:KRAKEN_API_SECRET)%'
+    - '@app.krakenHttp.client'
+    - '@KrakenApi\RateLimiter\RateLimiter'
+    - '%env(resolve:KRAKEN_API_KEY)%'
+    - '%env(resolve:KRAKEN_API_SECRET)%'
   calls:
     - setLogger: [ '@logger' ]
 ```
