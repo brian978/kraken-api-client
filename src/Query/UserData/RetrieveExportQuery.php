@@ -11,8 +11,12 @@ class RetrieveExportQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'RetrieveExport';
+    protected int $weight = 1;
 
+    # Parameter properties
     protected array $required = ['id'];
 
     /**

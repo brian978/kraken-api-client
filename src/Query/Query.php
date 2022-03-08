@@ -13,7 +13,12 @@ abstract class Query implements QueryInterface
 {
     protected Client $client;
 
+    # Endpoint properties
+    protected string $method;
     protected string $resource;
+    protected int $weight;
+
+    # Parameter properties
     protected array $required = [];
 
     /**
@@ -28,9 +33,19 @@ abstract class Query implements QueryInterface
     {
         $this->client = $client;
 
+        if (!isset($this->method)) {
+            throw new \RuntimeException('Query method not set!');
+        }
+
         if (!isset($this->resource)) {
             throw new \RuntimeException('Query resource not set!');
         }
+
+        if (!isset($this->weight)) {
+            throw new \RuntimeException('Query weight not set!');
+        }
+
+        $this->client->setRequestWeight($this->weight);
     }
 
     protected function payload(): array

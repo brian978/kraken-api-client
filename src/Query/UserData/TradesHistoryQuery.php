@@ -11,8 +11,12 @@ class TradesHistoryQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'TradesHistory';
+    protected int $weight = 2;
 
+    // Types of trades to query
     public const TYPE_ALL = 'all';
     public const TYPE_ANY = 'any position';
     public const TYPE_CLOSED = 'closed position';
@@ -37,7 +41,7 @@ class TradesHistoryQuery extends Query
     protected string $type = self::TYPE_ALL;
 
     /**
-     * Whether or not to include trades related to position in output
+     * Whether to include trades related to position in output
      *
      * @var bool
      */

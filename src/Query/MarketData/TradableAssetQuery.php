@@ -11,8 +11,12 @@ class TradableAssetQuery extends Query
 {
     use PublicQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'AssetPairs';
+    protected int $weight = 0;
 
+    // Information types
     public const INFO_ALL = 'info';
     public const INFO_LEVERAGE = 'leverage';
     public const INFO_FEES = 'fees';

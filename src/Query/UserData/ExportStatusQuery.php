@@ -11,10 +11,15 @@ class ExportStatusQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'ExportStatus';
+    protected int $weight = 1;
 
+    # Parameter properties
     protected array $required = ['report'];
 
+    // Types of reports
     public const REPORT_TRADES = 'trades';
     public const REPORT_LEDGERS = 'ledgers';
 

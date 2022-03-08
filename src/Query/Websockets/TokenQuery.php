@@ -11,5 +11,8 @@ class TokenQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'GetWebSocketsToken';
+    protected int $weight = 1;
 }

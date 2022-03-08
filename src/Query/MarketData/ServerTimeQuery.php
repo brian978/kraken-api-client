@@ -11,5 +11,8 @@ class ServerTimeQuery extends Query
 {
     use PublicQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'Time';
+    protected int $weight = 0;
 }

@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * @property-read Client $client
+ * @property-read string $method
  * @property-read string $resource
  * @method array payload()
  */
@@ -17,6 +18,6 @@ trait PublicQuery
      */
     protected function makeRequest(): ResponseInterface
     {
-        return $this->client->publicRequest($this->resource, $this->payload());
+        return $this->client->publicRequest($this->method, $this->resource, $this->payload());
     }
 }

@@ -11,7 +11,10 @@ class OpenPositionsQuery extends Query
 {
     use PrivateQuery;
 
+    # Endpoint properties
+    protected string $method = 'POST';
     protected string $resource = 'OpenPositions';
+    protected int $weight = 1;
 
     /**
      * Comma delimited list of transaction IDs to query info about (20 maximum)
